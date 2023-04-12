@@ -51,6 +51,9 @@ namespace calculator
 
             secondNumberIsMemorized = true;
 
+            // Вызов функции (textBox2WindowOperation) -  (показывание опериции сверху с первым числом)
+            textBox2WindowOperation(OperationTextBox2: "+");
+
             // Очищение консоли
             textBox1.Clear();
         }
@@ -66,6 +69,9 @@ namespace calculator
             firstNumberIsMemorized = textBox1.Text;
 
             secondNumberIsMemorized = true;
+
+            // Вызов функции (textBox2WindowOperation) -  (показывание опериции сверху с первым числом)
+            textBox2WindowOperation(OperationTextBox2: "-");
 
             // Очищение консоли
             textBox1.Clear();
@@ -83,6 +89,9 @@ namespace calculator
 
             secondNumberIsMemorized = true;
 
+            // Вызов функции (textBox2WindowOperation) -  (показывание опериции сверху с первым числом)
+            textBox2WindowOperation(OperationTextBox2: "×");
+
             // Очищение консоли
             textBox1.Clear();
         }
@@ -99,6 +108,9 @@ namespace calculator
 
             secondNumberIsMemorized = true;
 
+            // Вызов функции (textBox2WindowOperation) -  (показывание опериции сверху с первым числом)
+            textBox2WindowOperation(OperationTextBox2: "÷");
+
             // Очищение консоли
             textBox1.Clear();
         }
@@ -114,6 +126,9 @@ namespace calculator
             firstNumberIsMemorized = textBox1.Text;
 
             secondNumberIsMemorized = true;
+
+            // Вызов функции (textBox2WindowOperation) -  (показывание опериции сверху с первым числом)
+            textBox2WindowOperation(OperationTextBox2: "%");
 
             // Очищение консоли
             textBox1.Clear();
@@ -134,8 +149,19 @@ namespace calculator
 
             secondNumberIsMemorized = true;
 
+            // Вызов функции (textBox2WindowOperation) -  (показывание опериции сверху с первым числом)
+            textBox2WindowOperation(OperationTextBox2: "√");
+
             // Очищение консоли
             textBox1.Clear();
+        }
+
+        // Функция (textBox2WindowOperation) (для показывание опериции сверху с первым числом)
+        private void textBox2WindowOperation(string OperationTextBox2)
+        {
+            // Показывание опериции сверху с первым числом
+            textBox2.Text = textBox2.Text + firstNumberIsMemorized;
+            textBox2.Text = textBox2.Text + OperationTextBox2;
         }
 
 
@@ -325,6 +351,9 @@ namespace calculator
 
             // Конвертируем наш результат в строку и выводим в текст бокс
             textBox1.Text = result.ToString();
+
+            // Очищаем (textBox2) (опериции сверху с первым числом)
+            textBox2.Clear();
         }
 
 
@@ -414,6 +443,5 @@ namespace calculator
 
             System.Diagnostics.Process.Start(url);
         }
-
     }
 }
