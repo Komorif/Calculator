@@ -314,11 +314,14 @@ namespace calculator
                 // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
                 EndOfOperation = "no";
 
+                // Добавляем предыдущий результат во второй текст бокс
+                textBox2.Text = textBox2.Text + result;
+
                 // Операция которую при вызове этой функции
                 operation = FundsEntryOperation;
 
                 // Запомнили действие
-                firstNumberIsMemorized = textBox1.Text;
+                firstNumberIsMemorized = result + textBox1.Text;
 
                 secondNumberIsMemorized = true;
 
@@ -361,6 +364,9 @@ namespace calculator
 
                 // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
                 EndOfOperation = "no";
+
+                // Добавляем предыдущий результат во второй текст бокс
+                textBox2.Text = textBox2.Text + result;
 
                 // Добавляем в консоль цифру number
                 textBox1.Text = textBox1.Text + number;
