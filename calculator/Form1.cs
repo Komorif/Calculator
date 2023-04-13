@@ -33,66 +33,6 @@ namespace calculator
 
 
 
-        // Операциии (+, -, × ...)
-
-        // Сложение - +
-        private void button2_Click(object sender, EventArgs e)
-        {
-            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции +)
-            TemplateForOperations(FundsEntryOperation: "+");
-        }
-
-
-        // Вычитание - -
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции -)
-            TemplateForOperations(FundsEntryOperation: "-");
-        }
-
-
-        // Умножение - ×
-        private void button9_Click(object sender, EventArgs e)
-        {
-            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции ×)
-            TemplateForOperations(FundsEntryOperation: "×");
-        }
-
-
-        // Деление - ÷
-        private void button13_Click(object sender, EventArgs e)
-        {
-            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции ÷)
-            TemplateForOperations(FundsEntryOperation: "÷");
-        }
-
-
-        // Процент - %
-        private void button26_Click(object sender, EventArgs e)
-        {
-            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции %)
-            TemplateForOperations(FundsEntryOperation: "%");
-        }
-
-
-
-        // Нужно только "одно" число
-
-        // √ - Корень
-        private void button4_Click(object sender, EventArgs e)
-        {
-            // Очищаем предыдущее число во втором текст боксе
-            textBox2.Clear();
-
-            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции √)
-            TemplateForOperations(FundsEntryOperation: "√");
-
-            // Добавляем цифру после √
-            textBox2.Text = textBox2.Text + firstNumberIsMemorized;
-        }
-
-
-
         // Числа 0 - 9
 
         // Цифра - 9
@@ -176,6 +116,103 @@ namespace calculator
 
 
 
+        // Операциии (+, -, × ...)
+
+        // Сложение - +
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции +)
+            TemplateForOperations(FundsEntryOperation: " + ");
+        }
+
+
+        // Вычитание - -
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции -)
+            TemplateForOperations(FundsEntryOperation: " - ");
+        }
+
+
+        // Умножение - ×
+        private void button9_Click(object sender, EventArgs e)
+        {
+            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции ×)
+            TemplateForOperations(FundsEntryOperation: " × ");
+        }
+
+
+        // Деление - ÷
+        private void button13_Click(object sender, EventArgs e)
+        {
+            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции ÷)
+            TemplateForOperations(FundsEntryOperation: " ÷ ");
+        }
+
+
+        // Нужно только "одно" число
+
+        // Процент - %
+        private void button26_Click(object sender, EventArgs e)
+        {
+            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции %)
+            // (один пробел перед % для избежания лишних пробелов)
+            TemplateForOperations(FundsEntryOperation: " %");
+
+            // Конвертируем первое число ToDouble в firstNumberIsMemorized
+            numberOne = Convert.ToDouble(firstNumberIsMemorized);
+
+            // Операция (%) с одним числом
+            result = numberOne / 100;
+
+            // secondNumberIsMemorized = правда
+            secondNumberIsMemorized = true;
+
+            // Конвертируем наш результат в строку и выводим в первый текст бокс
+            textBox1.Text = result.ToString();
+
+            // Записываем наш результат во втророй текст бокс
+            textBox2.Text = textBox2.Text + " = " + result;
+
+            // Переменной (EndOfOperation) типа string присваиваем строку yes
+            // (мы посчитали нашу операцию => конец операции равен строке да)
+            // (это нужно для будущей проверки)
+            EndOfOperation = "yes";
+        }
+
+
+        // √ - Корень
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // Очищаем предыдущее число во втором текст боксе
+            textBox2.Clear();
+
+            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции √)
+            TemplateForOperations(FundsEntryOperation: "√");
+
+            // Конвертируем первое число ToDouble в firstNumberIsMemorized
+            numberOne = Convert.ToDouble(firstNumberIsMemorized);
+
+            // Операция (√) с одним числом
+            result = Math.Sqrt(numberOne);
+
+            // secondNumberIsMemorized = правда
+            secondNumberIsMemorized = true;
+
+            // Конвертируем наш результат в строку и выводим в первый текст бокс
+            textBox1.Text = result.ToString();
+
+            // Записываем наш результат во втророй текст бокс
+            textBox2.Text = textBox2.Text + numberOne + " = " + result;
+
+            // Переменной (EndOfOperation) типа string присваиваем строку yes
+            // (мы посчитали нашу операцию => конец операции равен строке да)
+            // (это нужно для будущей проверки)
+            EndOfOperation = "yes";
+        }
+
+
+
         // Логика для калькулятора прописанная в кнопке равно
 
         // Равно - =
@@ -194,7 +231,7 @@ namespace calculator
             // Условия для операций
 
             // Сложение - +
-            if (operation == "+")
+            if (operation == " + ")
             {
                 // Конвертируем второе число ToDouble в текстовое поле с цифрами
                 // Только для операций с двумя числами
@@ -206,7 +243,7 @@ namespace calculator
 
 
             // Вычитание - -
-            else if (operation == "-")
+            else if (operation == " - ")
             {
                 // Конвертируем второе число ToDouble в текстовое поле с цифрами
                 // Только для операций с двумя числами
@@ -218,7 +255,7 @@ namespace calculator
 
 
             // Умножение - ×
-            else if (operation == "×")
+            else if (operation == " × ")
             {
                 // Конвертируем второе число ToDouble в текстовое поле с цифрами
                 // Только для операций с двумя числами
@@ -230,7 +267,7 @@ namespace calculator
 
 
             // Деление - ÷
-            else if (operation == "÷")
+            else if (operation == " ÷ ")
             {
                 // Конвертируем второе число ToDouble в текстовое поле с цифрами
                 // Только для операций с двумя числами
@@ -241,33 +278,13 @@ namespace calculator
             }
 
 
-            //  Процент - %
-            else if (operation == "%")
-            {
-                // Конвертируем второе число ToDouble в текстовое поле с цифрами
-                // Только для операций с двумя числами
-                numberTwo = Convert.ToDouble(textBox1.Text);
-
-                // Операция (%) первого и второго числа
-                result = numberOne / numberTwo * 100;
-            }
-
-
-            // Корень - √
-            else if (operation == "√")
-            {
-                // Операция (√) с одним числом
-                result = Math.Sqrt(numberOne);
-            }
-
-
             // Пользователь нажимает на =
-            operation = "=";
+            operation = " = ";
 
             // secondNumberIsMemorized = правда
             secondNumberIsMemorized = true;
 
-            // Конвертируем наш результат в строку и выводим в текст бокс
+            // Конвертируем наш результат в строку и выводим в первый текст бокс
             textBox1.Text = result.ToString();
 
             // Записываем наш результат во втророй текст бокс
@@ -308,6 +325,7 @@ namespace calculator
                 // Вызов функции (TemplateForOperationsFromAbove) (показывание опериции сверху с первым числом)
                 textBox2.Text = textBox2.Text + FundsEntryOperation;
             }
+
 
             // Проверка переменной (EndOfOperation) типа string (если no)
             // (то есть если мы нажали на операцию но еще не нажали на = будет это)
