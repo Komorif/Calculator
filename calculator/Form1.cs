@@ -1,6 +1,5 @@
-﻿using System;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+﻿using System.Windows.Forms;
+using System;
 
 namespace calculator
 {
@@ -22,6 +21,7 @@ namespace calculator
 
         // Конец операции
         public string EndOfOperation = "no";
+
 
 
         // Начало
@@ -75,13 +75,20 @@ namespace calculator
         }
 
 
-        // Нужно только 'одно' число
+
+        // Нужно только "одно" число
 
         // √ - Корень
         private void button4_Click(object sender, EventArgs e)
         {
+            // Очищаем предыдущее число во втором текст боксе
+            textBox2.Clear();
+
             // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции √)
             TemplateForOperations(FundsEntryOperation: "√");
+
+            // Добавляем цифру после √
+            textBox2.Text = textBox2.Text + firstNumberIsMemorized;
         }
 
 
@@ -358,7 +365,7 @@ namespace calculator
         }
 
 
-        
+
         // Вторичные кнопки
 
         // Очистить текстовое поле - C
