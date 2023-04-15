@@ -317,6 +317,9 @@ namespace calculator
                 // Добавляем предыдущий результат во второй текст бокс
                 textBox2.Text = textBox2.Text + result;
 
+                // Добавляем предыдущий результат в первый текст бокс
+                textBox1.Text = textBox1.Text + result;
+
                 // Операция которую при вызове этой функции
                 operation = FundsEntryOperation;
 
@@ -365,14 +368,11 @@ namespace calculator
                 // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
                 EndOfOperation = "no";
 
-                // Добавляем предыдущий результат во второй текст бокс
-                textBox2.Text = textBox2.Text + result;
+                // Добавляем в первый текст бокс предыдущий результат и цифру number
+                textBox1.Text = textBox1.Text + result + number;
 
-                // Добавляем в консоль цифру number
-                textBox1.Text = textBox1.Text + number;
-
-                // Добавляем во второй текст бокс цифру number
-                textBox2.Text = textBox2.Text + number;
+                // Добавляем во второй текст бокс предыдущий результат и цифру number
+                textBox2.Text = textBox2.Text + result + number;
             }
 
 
