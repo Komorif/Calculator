@@ -156,60 +156,102 @@ namespace calculator
         // Процент - %
         private void button26_Click(object sender, EventArgs e)
         {
-            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции %)
-            // (один пробел перед % для избежания лишних пробелов)
-            TemplateForOperations(FundsEntryOperation: " %");
+            // Если firstNumberIsMemorized не равно пустой строке
+            if (firstNumberIsMemorized != "")
+            {
+                // Конвертируем первое число ToDouble в firstNumberIsMemorized
+                numberOne = Convert.ToDouble(firstNumberIsMemorized);
 
-            // Конвертируем первое число ToDouble в firstNumberIsMemorized
-            numberOne = Convert.ToDouble(firstNumberIsMemorized);
+                // Если все правильно (первый номер) не равен нулю
+                if (numberOne != 0 & firstNumberIsMemorized != "")
+                {
+                    // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции %)
+                    // (один пробел перед % для избежания лишних пробелов)
+                    TemplateForOperations(FundsEntryOperation: " %");
 
-            // Операция (%) с одним числом
-            result = numberOne / 100;
+                    // Операция (%) с одним числом
+                    result = numberOne / 100;
 
-            // secondNumberIsMemorized = правда
-            secondNumberIsMemorized = true;
+                    // secondNumberIsMemorized = правда
+                    secondNumberIsMemorized = true;
 
-            // Конвертируем наш результат в строку и выводим в первый текст бокс
-            textBox1.Text = result.ToString();
+                    // Конвертируем наш результат в строку и выводим в первый текст бокс
+                    textBox1.Text = result.ToString();
 
-            // Записываем наш результат во втророй текст бокс
-            textBox2.Text = textBox2.Text + " = " + result;
+                    // Записываем наш результат во втророй текст бокс
+                    textBox2.Text = textBox2.Text + " = " + result;
 
-            // Переменной (EndOfOperation) типа string присваиваем строку yes
-            // (мы посчитали нашу операцию => конец операции равен строке да)
-            // (это нужно для будущей проверки)
-            EndOfOperation = "yes";
+                    // Переменной (EndOfOperation) типа string присваиваем строку yes
+                    // (мы посчитали нашу операцию => конец операции равен строке да)
+                    // (это нужно для будущей проверки)
+                    EndOfOperation = "yes";
+                }
+
+                // Если первый номер равен нулю (он изначально равен нулю) то выдаст ошибку
+                else
+                {
+                    Error();
+                }
+            }
+
+            // В ином случае при нажатии на кнопку равно будет ошибка
+            else
+            {
+                Error();
+            }
         }
 
 
         // √ - Корень
         private void button4_Click(object sender, EventArgs e)
         {
-            // Очищаем предыдущее число во втором текст боксе
-            textBox2.Clear();
+            // Если firstNumberIsMemorized не равно пустой строке
+            if (firstNumberIsMemorized != "")
+            {
+                // Конвертируем первое число ToDouble в firstNumberIsMemorized
+                numberOne = Convert.ToDouble(firstNumberIsMemorized);
 
-            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции √)
-            TemplateForOperations(FundsEntryOperation: "√");
+                // Если все правильно (первый номер) не равен нулю
+                if (numberOne != 0 & firstNumberIsMemorized != "")
+                {
+                    // Очищаем предыдущее число во втором текст боксе
+                    textBox2.Clear();
 
-            // Конвертируем первое число ToDouble в firstNumberIsMemorized
-            numberOne = Convert.ToDouble(firstNumberIsMemorized);
+                    // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции √)
+                    TemplateForOperations(FundsEntryOperation: "√");
 
-            // Операция (√) с одним числом
-            result = Math.Sqrt(numberOne);
 
-            // secondNumberIsMemorized = правда
-            secondNumberIsMemorized = true;
+                    // Операция (√) с одним числом
+                    result = Math.Sqrt(numberOne);
 
-            // Конвертируем наш результат в строку и выводим в первый текст бокс
-            textBox1.Text = result.ToString();
+                    // secondNumberIsMemorized = правда
+                    secondNumberIsMemorized = true;
 
-            // Записываем наш результат во втророй текст бокс
-            textBox2.Text = textBox2.Text + numberOne + " = " + result;
+                    // Конвертируем наш результат в строку и выводим в первый текст бокс
+                    textBox1.Text = result.ToString();
 
-            // Переменной (EndOfOperation) типа string присваиваем строку yes
-            // (мы посчитали нашу операцию => конец операции равен строке да)
-            // (это нужно для будущей проверки)
-            EndOfOperation = "yes";
+                    // Записываем наш результат во втророй текст бокс
+                    textBox2.Text = textBox2.Text + numberOne + " = " + result;
+
+                    // Переменной (EndOfOperation) типа string присваиваем строку yes
+                    // (мы посчитали нашу операцию => конец операции равен строке да)
+                    // (это нужно для будущей проверки)
+                    EndOfOperation = "yes";
+                }
+
+                // Если первый номер равен нулю (он изначально равен нулю) то выдаст ошибку
+                else
+                {
+                    Error();
+                }
+            }
+
+            // В ином случае при нажатии на кнопку равно будет ошибка
+            else
+            {
+                Error();    
+            }
+
         }
 
 
@@ -268,7 +310,7 @@ namespace calculator
                 }
 
                 // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
-                else if (numberTwo == 0 & numberOne == 0)
+                else
                 {
                     Error();
                 }
@@ -315,7 +357,7 @@ namespace calculator
                 }
 
                 // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
-                else if (numberTwo == 0 & numberOne == 0)
+                else
                 {
                     Error();
                 }
@@ -362,7 +404,7 @@ namespace calculator
                 }
 
                 // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
-                else if (numberTwo == 0 & numberOne == 0)
+                else
                 {
                     Error();
                 }
@@ -409,7 +451,7 @@ namespace calculator
                 }
 
                 // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
-                else if (numberTwo == 0 & numberOne == 0)
+                else
                 {
                     Error();
                 }
