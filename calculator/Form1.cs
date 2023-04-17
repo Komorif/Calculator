@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using System;
+using System.Data;
 
 namespace calculator
 {
@@ -11,13 +12,13 @@ namespace calculator
         string operation;
 
         // строковая переменная - firstNumberIsMemorized (первое число запоминаемое)
-        string firstNumberIsMemorized;
+        string firstNumberIsMemorized = "";
 
         // Булевая переменная - secondNumberIsMemorized (2 число)
         public bool secondNumberIsMemorized;
 
         // Объявляем публичные переменные (double)
-        public double numberOne, numberTwo, result;
+        public double numberOne = 0, numberTwo = 0, result; // Специально даём Первому и второму числу 0 значение для будущей проверки
 
         // Конец операции
         public string EndOfOperation = "no";
@@ -218,9 +219,6 @@ namespace calculator
         // Равно - =
         private void button18_Click(object sender, EventArgs e)
         {
-            // Конвертируем первое число ToDouble в firstNumberIsMemorized
-            numberOne = Convert.ToDouble(firstNumberIsMemorized);
-
             // Необходимое объявление результата
             result = 0;
 
@@ -231,69 +229,197 @@ namespace calculator
             // Условия для операций
 
             // Сложение - +
-            if (operation == " + ")
+            if (operation == " + " & firstNumberIsMemorized != "")
             {
+                // Делаем преобразование первого числа в numberOne и Второго числа из первого текст бокса для проверки
+
+                // Конвертируем первое число ToDouble в firstNumberIsMemorized
+                numberOne = Convert.ToDouble(firstNumberIsMemorized);
+
                 // Конвертируем второе число ToDouble в текстовое поле с цифрами
                 // Только для операций с двумя числами
                 numberTwo = Convert.ToDouble(textBox1.Text);
 
-                // Операция (сложения) первого и второго числа
-                result = numberOne + numberTwo;
+                // Если все правильно (первый номер и второй) не равны нулю
+                if (numberTwo != 0 & numberOne != 0)
+                {
+                    // Операция (сложения) первого и второго числа
+                    result = numberOne + numberTwo;
+
+
+                    // Результат выражения
+
+                    // Пользователь нажимает на =
+                    operation = " = ";
+
+                    // secondNumberIsMemorized = правда
+                    secondNumberIsMemorized = true;
+
+                    // Конвертируем наш результат в строку и выводим в первый текст бокс
+                    textBox1.Text = result.ToString();
+
+                    // Записываем наш результат во втророй текст бокс
+                    textBox2.Text = textBox2.Text + operation + result;
+
+                    // Переменной (EndOfOperation) типа string присваиваем строку yes
+                    // (мы посчитали нашу операцию => конец операции равен строке да)
+                    // (это нужно для будущей проверки)
+                    EndOfOperation = "yes";
+                }
+
+                // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
+                else if (numberTwo == 0 & numberOne == 0)
+                {
+                    Error();
+                }
             }
 
 
             // Вычитание - -
-            else if (operation == " - ")
+            else if (operation == " - " & firstNumberIsMemorized != "")
             {
+                // Делаем преобразование первого числа в numberOne и Второго числа из первого текст бокса для проверки
+
+                // Конвертируем первое число ToDouble в firstNumberIsMemorized
+                numberOne = Convert.ToDouble(firstNumberIsMemorized);
+
                 // Конвертируем второе число ToDouble в текстовое поле с цифрами
                 // Только для операций с двумя числами
                 numberTwo = Convert.ToDouble(textBox1.Text);
 
-                // Операция (вычитания) первого и второго числа
-                result = numberOne - numberTwo;
+                // Если все правильно (первый номер и второй) не равны нулю
+                if (numberTwo != 0 & numberOne != 0)
+                {
+                    // Операция (сложения) первого и второго числа
+                    result = numberOne - numberTwo;
+
+
+                    // Результат выражения
+
+                    // Пользователь нажимает на =
+                    operation = " = ";
+
+                    // secondNumberIsMemorized = правда
+                    secondNumberIsMemorized = true;
+
+                    // Конвертируем наш результат в строку и выводим в первый текст бокс
+                    textBox1.Text = result.ToString();
+
+                    // Записываем наш результат во втророй текст бокс
+                    textBox2.Text = textBox2.Text + operation + result;
+
+                    // Переменной (EndOfOperation) типа string присваиваем строку yes
+                    // (мы посчитали нашу операцию => конец операции равен строке да)
+                    // (это нужно для будущей проверки)
+                    EndOfOperation = "yes";
+                }
+
+                // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
+                else if (numberTwo == 0 & numberOne == 0)
+                {
+                    Error();
+                }
             }
 
 
             // Умножение - ×
-            else if (operation == " × ")
+            else if (operation == " × " & firstNumberIsMemorized != "")
             {
+                // Делаем преобразование первого числа в numberOne и Второго числа из первого текст бокса для проверки
+
+                // Конвертируем первое число ToDouble в firstNumberIsMemorized
+                numberOne = Convert.ToDouble(firstNumberIsMemorized);
+
                 // Конвертируем второе число ToDouble в текстовое поле с цифрами
                 // Только для операций с двумя числами
                 numberTwo = Convert.ToDouble(textBox1.Text);
 
-                // Операция (умножения) первого и второго числа
-                result = numberOne * numberTwo;
+                // Если все правильно (первый номер и второй) не равны нулю
+                if (numberTwo != 0 & numberOne != 0)
+                {
+                    // Операция (сложения) первого и второго числа
+                    result = numberOne * numberTwo;
+
+
+                    // Результат выражения
+
+                    // Пользователь нажимает на =
+                    operation = " = ";
+
+                    // secondNumberIsMemorized = правда
+                    secondNumberIsMemorized = true;
+
+                    // Конвертируем наш результат в строку и выводим в первый текст бокс
+                    textBox1.Text = result.ToString();
+
+                    // Записываем наш результат во втророй текст бокс
+                    textBox2.Text = textBox2.Text + operation + result;
+
+                    // Переменной (EndOfOperation) типа string присваиваем строку yes
+                    // (мы посчитали нашу операцию => конец операции равен строке да)
+                    // (это нужно для будущей проверки)
+                    EndOfOperation = "yes";
+                }
+
+                // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
+                else if (numberTwo == 0 & numberOne == 0)
+                {
+                    Error();
+                }
             }
 
 
             // Деление - ÷
-            else if (operation == " ÷ ")
+            else if (operation == " ÷ " & firstNumberIsMemorized != "")
             {
+                // Делаем преобразование первого числа в numberOne и Второго числа из первого текст бокса для проверки
+
+                // Конвертируем первое число ToDouble в firstNumberIsMemorized
+                numberOne = Convert.ToDouble(firstNumberIsMemorized);
+
                 // Конвертируем второе число ToDouble в текстовое поле с цифрами
                 // Только для операций с двумя числами
                 numberTwo = Convert.ToDouble(textBox1.Text);
 
-                // Операция (деления) первого и второго числа
-                result = numberOne / numberTwo;
+                // Если все правильно (первый номер и второй) не равны нулю
+                if (numberTwo != 0 & numberOne != 0)
+                {
+                    // Операция (сложения) первого и второго числа
+                    result = numberOne / numberTwo;
+
+
+                    // Результат выражения
+
+                    // Пользователь нажимает на =
+                    operation = " = ";
+
+                    // secondNumberIsMemorized = правда
+                    secondNumberIsMemorized = true;
+
+                    // Конвертируем наш результат в строку и выводим в первый текст бокс
+                    textBox1.Text = result.ToString();
+
+                    // Записываем наш результат во втророй текст бокс
+                    textBox2.Text = textBox2.Text + operation + result;
+
+                    // Переменной (EndOfOperation) типа string присваиваем строку yes
+                    // (мы посчитали нашу операцию => конец операции равен строке да)
+                    // (это нужно для будущей проверки)
+                    EndOfOperation = "yes";
+                }
+
+                // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
+                else if (numberTwo == 0 & numberOne == 0)
+                {
+                    Error();
+                }
             }
 
-
-            // Пользователь нажимает на =
-            operation = " = ";
-
-            // secondNumberIsMemorized = правда
-            secondNumberIsMemorized = true;
-
-            // Конвертируем наш результат в строку и выводим в первый текст бокс
-            textBox1.Text = result.ToString();
-
-            // Записываем наш результат во втророй текст бокс
-            textBox2.Text = textBox2.Text + operation + result;
-
-            // Переменной (EndOfOperation) типа string присваиваем строку yes
-            // (мы посчитали нашу операцию => конец операции равен строке да)
-            // (это нужно для будущей проверки)
-            EndOfOperation = "yes";
+            // В ином случае при нажатии на кнопку равно будет ошибка
+            else
+            {
+                Error();
+            }
         }
 
 
@@ -309,6 +435,8 @@ namespace calculator
             {
                 // Очищаем второй текст бокс от предыдущих вычислений
                 textBox2.Clear();
+
+                // Очищаем первый текст бокс от предыдущих вычислений
                 textBox1.Clear();
 
                 // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
@@ -363,6 +491,8 @@ namespace calculator
             {
                 // Очищаем второй текст бокс от предыдущих вычислений
                 textBox2.Clear();
+
+                // Очищаем первый текст бокс от предыдущих вычислений
                 textBox1.Clear();
 
                 // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
@@ -389,6 +519,31 @@ namespace calculator
         }
 
 
+        // Функция Error (для ошибок)
+        private void Error()
+        {
+            // Очищаем второй текст бокс от предыдущих вычислений
+            textBox2.Clear();
+
+            // Очищаем первый текст бокс от предыдущих вычислений
+            textBox1.Clear();
+
+            // secondNumberIsMemorized = правда
+            secondNumberIsMemorized = true;
+
+            // Добавляем в консоль error208
+            textBox1.Text = textBox1.Text + "error208";
+
+            // Добавляем в консоль error208
+            textBox2.Text = textBox2.Text + "error208";
+
+            // Переменной (EndOfOperation) типа string присваиваем строку yes
+            // (мы посчитали нашу операцию => конец операции равен строке да)
+            // (это нужно для будущей проверки)
+            EndOfOperation = "yes";// Очищаем второй текст бокс от предыдущих вычислений
+        }
+
+
 
         // Вторичные кнопки
 
@@ -399,14 +554,6 @@ namespace calculator
 
             // Очищаем (textBox2) (опериции сверху с первым числом)
             textBox2.Clear();
-        }
-
-
-        // Точка - .
-        private void button19_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = textBox1.Text + ".";
-            textBox2.Text = textBox2.Text + ".";
         }
 
 
