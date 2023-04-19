@@ -665,7 +665,7 @@ namespace calculator
                 VisitLink("https://www.youtube.com/channel/UCb2GlPOgqB_VpWTvQM_dzKg");
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Unable to open link that was clicked.");
             }
@@ -680,7 +680,7 @@ namespace calculator
                 VisitLink("https://t.me/New_Vision_rus_en_bot");
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Unable to open link that was clicked.");
             }
@@ -696,7 +696,7 @@ namespace calculator
                 VisitLink("https://github.com/Komorif");
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Unable to open link that was clicked.");
             }
