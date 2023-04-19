@@ -521,6 +521,23 @@ namespace calculator
                 // Вызов функции (TemplateForOperationsFromAbove) (показывание опериции сверху с первым числом)
                 textBox2.Text = textBox2.Text + FundsEntryOperation;
             }
+
+
+            // Проверка переменной (EndOfOperation) типа string (если error)
+            // (то есть если сработала ошибка будет это)
+            else if (EndOfOperation == "error")
+            {
+                // Очищаем второй текст бокс от предыдущих вычислений
+                textBox2.Clear();
+
+                // Очищаем первый текст бокс от предыдущих вычислений
+                textBox1.Clear();
+
+                // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
+                EndOfOperation = "no";
+
+                Error();
+            }
         }
 
 
@@ -558,6 +575,27 @@ namespace calculator
                 // Добавляем во второй текст бокс цифру number
                 textBox2.Text = textBox2.Text + number;
             }
+
+
+            // Проверка переменной (EndOfOperation) типа string (если error)
+            // (то есть если сработала ошибка будет это)
+            else if (EndOfOperation == "error")
+            {
+                // Очищаем второй текст бокс от предыдущих вычислений
+                textBox2.Clear();
+
+                // Очищаем первый текст бокс от предыдущих вычислений
+                textBox1.Clear();
+
+                // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
+                EndOfOperation = "no";
+
+                // Добавляем в консоль цифру number
+                textBox1.Text = textBox1.Text + number;
+
+                // Добавляем во второй текст бокс цифру number
+                textBox2.Text = textBox2.Text + number;
+            }
         }
 
 
@@ -582,7 +620,7 @@ namespace calculator
             // Переменной (EndOfOperation) типа string присваиваем строку yes
             // (мы посчитали нашу операцию => конец операции равен строке да)
             // (это нужно для будущей проверки)
-            EndOfOperation = "yes";// Очищаем второй текст бокс от предыдущих вычислений
+            EndOfOperation = "error";// Очищаем второй текст бокс от предыдущих вычислений
         }
 
 
@@ -593,9 +631,9 @@ namespace calculator
         private void button3_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
-
             // Очищаем (textBox2) (опериции сверху с первым числом)
             textBox2.Clear();
+            textBox2.Text = "";
         }
 
 
