@@ -631,9 +631,9 @@ namespace calculator
         private void button3_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
+
             // Очищаем (textBox2) (опериции сверху с первым числом)
             textBox2.Clear();
-            textBox2.Text = "";
         }
 
 
