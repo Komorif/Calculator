@@ -156,24 +156,22 @@ namespace calculator
         // Процент - %
         private void button26_Click(object sender, EventArgs e)
         {
-            // Если firstNumberIsMemorized не равно пустой строке
-            if (firstNumberIsMemorized != "")
+            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции √)
+            TemplateForOperations(FundsEntryOperation: " %");
+
+            // Сложение - +
+            if (operation == " %" & firstNumberIsMemorized != "")
             {
+                // Делаем преобразование первого числа в numberOne и Второго числа из первого текст бокса для проверки
+
                 // Конвертируем первое число ToDouble в firstNumberIsMemorized
                 numberOne = Convert.ToDouble(firstNumberIsMemorized);
 
-                // Если все правильно (первый номер) не равен нулю
-                if (numberOne != 0 & firstNumberIsMemorized != "")
+                // Если все правильно (первый номер и второй) не равны нулю
+                if (numberOne != 0)
                 {
-                    // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции %)
-                    // (один пробел перед % для избежания лишних пробелов)
-                    TemplateForOperations(FundsEntryOperation: " %");
-
                     // Операция (%) с одним числом
                     result = numberOne / 100;
-
-                    // secondNumberIsMemorized = правда
-                    secondNumberIsMemorized = true;
 
                     // Конвертируем наш результат в строку и выводим в первый текст бокс
                     textBox1.Text = result.ToString();
@@ -187,17 +185,11 @@ namespace calculator
                     EndOfOperation = "yes";
                 }
 
-                // Если первый номер равен нулю (он изначально равен нулю) то выдаст ошибку
+                // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
                 else
                 {
                     Error();
                 }
-            }
-
-            // В ином случае при нажатии на кнопку равно будет ошибка
-            else
-            {
-                Error();
             }
         }
 
@@ -205,24 +197,26 @@ namespace calculator
         // √ - Корень
         private void button4_Click(object sender, EventArgs e)
         {
-            // Если firstNumberIsMemorized не равно пустой строке
-            if (firstNumberIsMemorized != "")
+            // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции √)
+            TemplateForOperations(FundsEntryOperation: "√");
+
+            // Сложение - +
+            if (operation == "√" & firstNumberIsMemorized != "")
             {
+                // Делаем преобразование первого числа в numberOne и Второго числа из первого текст бокса для проверки
+
                 // Конвертируем первое число ToDouble в firstNumberIsMemorized
                 numberOne = Convert.ToDouble(firstNumberIsMemorized);
 
-                // Если все правильно (первый номер) не равен нулю
-                if (numberOne != 0 & firstNumberIsMemorized != "")
+                // Если все правильно (первый номер и второй) не равны нулю
+                if (numberOne != 0)
                 {
                     // Очищаем предыдущее число во втором текст боксе
                     textBox2.Clear();
 
-                    // Используем созданную функцию (TemplateForOperations) (Шаблон для всех операций) (С выбором операции √)
-                    TemplateForOperations(FundsEntryOperation: "√");
-
-
                     // Операция (√) с одним числом
                     result = Math.Sqrt(numberOne);
+
 
                     // secondNumberIsMemorized = правда
                     secondNumberIsMemorized = true;
@@ -231,7 +225,7 @@ namespace calculator
                     textBox1.Text = result.ToString();
 
                     // Записываем наш результат во втророй текст бокс
-                    textBox2.Text = textBox2.Text + numberOne + " = " + result;
+                    textBox2.Text = textBox2.Text + operation + numberOne + " = " + result;
 
                     // Переменной (EndOfOperation) типа string присваиваем строку yes
                     // (мы посчитали нашу операцию => конец операции равен строке да)
@@ -239,19 +233,12 @@ namespace calculator
                     EndOfOperation = "yes";
                 }
 
-                // Если первый номер равен нулю (он изначально равен нулю) то выдаст ошибку
+                // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
                 else
                 {
                     Error();
                 }
             }
-
-            // В ином случае при нажатии на кнопку равно будет ошибка
-            else
-            {
-                Error();    
-            }
-
         }
 
 
