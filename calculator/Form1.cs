@@ -191,6 +191,12 @@ namespace calculator
                     Error();
                 }
             }
+
+            // В ином случае будет ошибка
+            else
+            {
+                Error();
+            }
         }
 
 
@@ -238,6 +244,12 @@ namespace calculator
                 {
                     Error();
                 }
+            }
+
+            // В ином случае будет ошибка
+            else
+            {
+                Error();
             }
         }
 
@@ -452,8 +464,86 @@ namespace calculator
         }
 
 
+        // Вторичные кнопки
 
-        // Функции для кнопок (операций и цифр)
+        // Очистить текстовое поле - C
+        private void button3_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+
+            // Очищаем (textBox2) (опериции сверху с первым числом)
+            textBox2.Clear();
+        }
+
+
+        // Удаление - <--
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int lenght = textBox1.Text.Length - 1;
+            string text = textBox1.Text;
+            textBox1.Clear();
+            textBox2.Clear();
+            for (int i = 0; i < lenght; i++)
+            {
+                textBox1.Text = textBox1.Text + text[i];
+                textBox2.Text = textBox2.Text + text[i];
+            }
+        }
+
+
+
+        // Кнопки с ссылками
+
+        // Создание ссылки в кнопке (с помощью link)
+
+        // Ютуб - Youtube
+        private void linkLabel2_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                VisitLink("https://www.youtube.com/channel/UCb2GlPOgqB_VpWTvQM_dzKg");
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to open link that was clicked.");
+            }
+        }
+
+
+        // Телеграмм - Telegram
+        private void linkLabel1_LinkClicked_1(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                VisitLink("https://t.me/New_Vision_rus_en_bot");
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to open link that was clicked.");
+            }
+
+        }
+
+
+        // Гитхаб - Github
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                VisitLink("https://github.com/Komorif");
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to open link that was clicked.");
+            }
+        }
+
+
+
+        // Функции
 
         // Функция (TemplateForOperations) (Шаблон для всех операций)
         private void TemplateForOperations(string FundsEntryOperation)
@@ -484,6 +574,9 @@ namespace calculator
                 firstNumberIsMemorized = result + textBox1.Text;
 
                 secondNumberIsMemorized = true;
+
+                // Очищение консоли
+                textBox1.Clear();
 
                 // Вызов функции (TemplateForOperationsFromAbove) (показывание опериции сверху с первым числом)
                 textBox2.Text = textBox2.Text + FundsEntryOperation;
@@ -611,86 +704,7 @@ namespace calculator
         }
 
 
-
-        // Вторичные кнопки
-
-        // Очистить текстовое поле - C
-        private void button3_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = "";
-
-            // Очищаем (textBox2) (опериции сверху с первым числом)
-            textBox2.Clear();
-        }
-
-
-        // Удаление - <--
-        private void button5_Click(object sender, EventArgs e)
-        {
-            int lenght = textBox1.Text.Length - 1;
-            string text = textBox1.Text;
-            textBox1.Clear();
-            textBox2.Clear();
-            for (int i = 0; i < lenght; i++)
-            {
-                textBox1.Text = textBox1.Text + text[i];
-                textBox2.Text = textBox2.Text + text[i];
-            }
-        }
-
-
-
-        // Кнопки с ссылками
-
-        // Создание ссылки в кнопке (с помощью link)
-
-        // Ютуб - Youtube
-        private void linkLabel2_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
-        {
-            try
-            {
-                VisitLink("https://www.youtube.com/channel/UCb2GlPOgqB_VpWTvQM_dzKg");
-            }
-
-            catch (Exception)
-            {
-                MessageBox.Show("Unable to open link that was clicked.");
-            }
-        }
-
-
-        // Телеграмм - Telegram
-        private void linkLabel1_LinkClicked_1(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
-        {
-            try
-            {
-                VisitLink("https://t.me/New_Vision_rus_en_bot");
-            }
-
-            catch (Exception)
-            {
-                MessageBox.Show("Unable to open link that was clicked.");
-            }
-
-        }
-
-
-        // Гитхаб - Github
-        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            try
-            {
-                VisitLink("https://github.com/Komorif");
-            }
-
-            catch (Exception)
-            {
-                MessageBox.Show("Unable to open link that was clicked.");
-            }
-        }
-
-
-        // ВизитЛинк - VisitLink (функция) (ссылка изменяемая для удобства)
+        // Функция VisitLink (создана для кнопок с ссылками) (ссылка изменяемая для удобства)
         private void VisitLink(string url) // string url это переменная для ссылки на ютуб, телеграмм и прочее
         {
             linkLabel1.LinkVisited = true;
