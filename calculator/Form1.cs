@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using System;
 using System.Data;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace calculator
 {
@@ -14,15 +15,15 @@ namespace calculator
         // строковая переменная - firstNumberIsMemorized (первое число запоминаемое)
         string firstNumberIsMemorized = "";
 
-        // Булевая переменная - secondNumberIsMemorized (2 число)
-        public bool secondNumberIsMemorized;
-
         // Объявляем публичные переменные (double)
-        public double numberOne = 0, numberTwo = 0, result; // Специально даём Первому и второму числу 0 значение для будущей проверки
+        public double numberOne = 0, numberTwo = 0, result = 0; // Специально даём Первому и второму числу 0 значение для будущей проверки
 
         // Конец операции
         public string EndOfOperation = "no";
 
+
+        // для удалеения кнопки
+        public string EditRes = "";
 
 
         // Начало
@@ -223,10 +224,6 @@ namespace calculator
                     // Операция (√) с одним числом
                     result = Math.Sqrt(numberOne);
 
-
-                    // secondNumberIsMemorized = правда
-                    secondNumberIsMemorized = true;
-
                     // Конвертируем наш результат в строку и выводим в первый текст бокс
                     textBox1.Text = result.ToString();
 
@@ -263,10 +260,6 @@ namespace calculator
             // Необходимое объявление результата
             result = 0;
 
-            // Второе число делаем true
-            secondNumberIsMemorized = true;
-
-
             // Условия для операций
 
             // Сложение - +
@@ -292,9 +285,6 @@ namespace calculator
 
                     // Пользователь нажимает на =
                     operation = " = ";
-
-                    // secondNumberIsMemorized = правда
-                    secondNumberIsMemorized = true;
 
                     // Конвертируем наш результат в строку и выводим в первый текст бокс
                     textBox1.Text = result.ToString();
@@ -340,9 +330,6 @@ namespace calculator
                     // Пользователь нажимает на =
                     operation = " = ";
 
-                    // secondNumberIsMemorized = правда
-                    secondNumberIsMemorized = true;
-
                     // Конвертируем наш результат в строку и выводим в первый текст бокс
                     textBox1.Text = result.ToString();
 
@@ -386,9 +373,6 @@ namespace calculator
 
                     // Пользователь нажимает на =
                     operation = " = ";
-
-                    // secondNumberIsMemorized = правда
-                    secondNumberIsMemorized = true;
 
                     // Конвертируем наш результат в строку и выводим в первый текст бокс
                     textBox1.Text = result.ToString();
@@ -434,9 +418,6 @@ namespace calculator
                     // Пользователь нажимает на =
                     operation = " = ";
 
-                    // secondNumberIsMemorized = правда
-                    secondNumberIsMemorized = true;
-
                     // Конвертируем наш результат в строку и выводим в первый текст бокс
                     textBox1.Text = result.ToString();
 
@@ -456,12 +437,14 @@ namespace calculator
                 }
             }
 
+
             // В ином случае при нажатии на кнопку равно будет ошибка
             else
             {
                 Error();
             }
         }
+
 
 
         // Вторичные кнопки
@@ -481,13 +464,61 @@ namespace calculator
         {
             int lenght = textBox1.Text.Length - 1;
             string text = textBox1.Text;
-            textBox1.Clear();
-            textBox2.Clear();
-            for (int i = 0; i < lenght; i++)
+
+            // Если первый номер не указан (т.е если вводим первое число)
+            if (firstNumberIsMemorized == "")
             {
-                textBox1.Text = textBox1.Text + text[i];
-                textBox2.Text = textBox2.Text + text[i];
+                textBox1.Clear();
+                textBox2.Clear();
+
+                for (int i = 0; i < lenght; i++)
+                {
+                    textBox1.Text = textBox1.Text + text[i];
+                    textBox2.Text = textBox2.Text + text[i];
+                }
             }
+
+
+            // Если первый номер указан (т.е если вводим второе число)
+            else if (firstNumberIsMemorized != "" & result == 0)
+            {
+                textBox1.Clear();
+                textBox2.Clear();
+
+                textBox2.Text = firstNumberIsMemorized + operation;
+
+                for (int i = 0; i < lenght; i++)
+                {
+                    textBox1.Text = textBox1.Text + text[i];
+                    textBox2.Text = textBox2.Text + text[i];
+                }
+            }
+
+
+            // Если результат готов
+            else
+            {
+                textBox1.Clear();
+                textBox2.Clear();
+
+                for (int i = 0; i < lenght; i++)
+                {
+                    EditRes = textBox2.Text + text[i];
+                    EditRes = textBox1.Text + text[i];
+
+                    textBox1.Text = EditRes;
+                    textBox2.Text = EditRes;
+                }
+
+            }
+
+
+
+
+
+
+
+
         }
 
 
@@ -552,34 +583,85 @@ namespace calculator
             // (то есть если мы нажали на операцию после = будет это)
             if (EndOfOperation == "yes")
             {
-                // Очищаем второй текст бокс от предыдущих вычислений
-                textBox2.Clear();
+                // Если Редактирование результата правда
+                if (EditRes != "")
+                {
+                    // Очищаем второй текст бокс от предыдущих вычислений
+                    textBox2.Clear();
 
-                // Очищаем первый текст бокс от предыдущих вычислений
-                textBox1.Clear();
+                    // Очищаем первый текст бокс от предыдущих вычислений
+                    textBox1.Clear();
 
-                // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
-                EndOfOperation = "no";
+                    // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
+                    EndOfOperation = "no";
 
-                // Добавляем предыдущий результат во второй текст бокс
-                textBox2.Text = textBox2.Text + result;
+                    // Добавляем предыдущий результат во второй текст бокс
+                    textBox2.Text = textBox2.Text + EditRes;
 
-                // Добавляем предыдущий результат в первый текст бокс
-                textBox1.Text = textBox1.Text + result;
+                    // Добавляем предыдущий результат в первый текст бокс
+                    textBox1.Text = textBox1.Text + EditRes;
 
-                // Операция которую при вызове этой функции
-                operation = FundsEntryOperation;
+                    // Операция которую при вызове этой функции
+                    operation = FundsEntryOperation;
 
-                // Запомнили действие
-                firstNumberIsMemorized = result + textBox1.Text;
+                    // Результат равен первому числу
+                    double res = Convert.ToDouble(EditRes);
 
-                secondNumberIsMemorized = true;
+                    res = numberOne;
 
-                // Очищение консоли
-                textBox1.Clear();
+                    // Запомнили действие
+                    firstNumberIsMemorized = textBox1.Text;
 
-                // Вызов функции (TemplateForOperationsFromAbove) (показывание опериции сверху с первым числом)
-                textBox2.Text = textBox2.Text + FundsEntryOperation;
+                    // Очищение консоли
+                    textBox1.Clear();
+
+                    // Вызов функции (TemplateForOperationsFromAbove) (показывание опериции сверху с первым числом)
+                    textBox2.Text = textBox2.Text + FundsEntryOperation;
+
+                    EditRes = "";       
+                }
+
+                // Если оно не трогалось то
+                else if (EditRes == "")
+                {
+                    EditRes = "";
+
+                    // Очищаем второй текст бокс от предыдущих вычислений
+                    textBox2.Clear();
+
+                    // Очищаем первый текст бокс от предыдущих вычислений
+                    textBox1.Clear();
+
+                    // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
+                    EndOfOperation = "no";
+
+                    // Добавляем предыдущий результат во второй текст бокс
+                    textBox2.Text = textBox2.Text + result;
+
+                    // Добавляем предыдущий результат в первый текст бокс
+                    textBox1.Text = textBox1.Text + result;
+
+                    // Операция которую при вызове этой функции
+                    operation = FundsEntryOperation;
+
+                    // Результат равен первому числу
+                    result = numberOne;
+
+                    // Запомнили действие
+                    firstNumberIsMemorized = textBox1.Text;
+
+                    // Очищение консоли
+                    textBox1.Clear();
+
+                    // Вызов функции (TemplateForOperationsFromAbove) (показывание опериции сверху с первым числом)
+                    textBox2.Text = textBox2.Text + FundsEntryOperation;
+                }
+
+                else
+                {
+                    Error();
+                }
+
             }
 
 
@@ -593,8 +675,6 @@ namespace calculator
                 // Запомнили действие
                 firstNumberIsMemorized = textBox1.Text;
 
-                secondNumberIsMemorized = true;
-
                 // Очищение консоли
                 textBox1.Clear();
 
@@ -607,15 +687,6 @@ namespace calculator
             // (то есть если сработала ошибка будет это)
             else if (EndOfOperation == "error")
             {
-                // Очищаем второй текст бокс от предыдущих вычислений
-                textBox2.Clear();
-
-                // Очищаем первый текст бокс от предыдущих вычислений
-                textBox1.Clear();
-
-                // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
-                EndOfOperation = "no";
-
                 Error();
             }
         }
@@ -637,11 +708,15 @@ namespace calculator
                 // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
                 EndOfOperation = "no";
 
+                result = 0;
+
+                result = numberOne;
+
                 // Добавляем в первый текст бокс предыдущий результат и цифру number
-                textBox1.Text = textBox1.Text + result + number;
+                textBox1.Text = textBox1.Text + number;
 
                 // Добавляем во второй текст бокс предыдущий результат и цифру number
-                textBox2.Text = textBox2.Text + result + number;
+                textBox2.Text = textBox2.Text + number;
             }
 
 
@@ -687,9 +762,6 @@ namespace calculator
 
             // Очищаем первый текст бокс от предыдущих вычислений
             textBox1.Clear();
-
-            // secondNumberIsMemorized = правда
-            secondNumberIsMemorized = true;
 
             // Добавляем в консоль error208
             textBox1.Text = textBox1.Text + "error208";
