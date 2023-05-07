@@ -21,10 +21,12 @@ namespace calculator
         // Конец операции
         public string EndOfOperation = "no";
 
-
-        // для удалеения кнопки
+        // Переменная для кнопки удаления
         public string EditRes = "";
 
+        public string EditNumberTwo = "";
+
+        public double res = 0;
 
         // Начало
 
@@ -189,6 +191,7 @@ namespace calculator
                 // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
                 else
                 {
+                    // Вызывем функция (Error) - ошибка
                     Error();
                 }
             }
@@ -196,6 +199,7 @@ namespace calculator
             // В ином случае будет ошибка
             else
             {
+                // Вызывем функция (Error) - ошибка
                 Error();
             }
         }
@@ -239,6 +243,7 @@ namespace calculator
                 // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
                 else
                 {
+                    // Вызывем функция (Error) - ошибка
                     Error();
                 }
             }
@@ -246,6 +251,7 @@ namespace calculator
             // В ином случае будет ошибка
             else
             {
+                // Вызывем функция (Error) - ошибка
                 Error();
             }
         }
@@ -301,6 +307,7 @@ namespace calculator
                 // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
                 else
                 {
+                    // Вызывем функция (Error) - ошибка
                     Error();
                 }
             }
@@ -345,13 +352,14 @@ namespace calculator
                 // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
                 else
                 {
+                    // Вызывем функция (Error) - ошибка
                     Error();
                 }
             }
 
 
             // Умножение - ×
-            else if (operation == " × " & firstNumberIsMemorized != "")
+            else if (operation == " × " & firstNumberIsMemorized != "" || operation == " × " & numberOne != 0)
             {
                 // Делаем преобразование первого числа в numberOne и Второго числа из первого текст бокса для проверки
 
@@ -389,6 +397,7 @@ namespace calculator
                 // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
                 else
                 {
+                    // Вызывем функция (Error) - ошибка
                     Error();
                 }
             }
@@ -433,6 +442,7 @@ namespace calculator
                 // Если первый номер и второй равны нулю (они изначально равны нулю) то выдаст ошибку
                 else
                 {
+                    // Вызывем функция (Error) - ошибка
                     Error();
                 }
             }
@@ -441,6 +451,7 @@ namespace calculator
             // В ином случае при нажатии на кнопку равно будет ошибка
             else
             {
+                // Вызывем функция (Error) - ошибка
                 Error();
             }
         }
@@ -452,6 +463,7 @@ namespace calculator
         // Очистить текстовое поле - C
         private void button3_Click(object sender, EventArgs e)
         {
+            // Очищаем первый текст бокс
             textBox1.Text = "";
 
             // Очищаем (textBox2) (опериции сверху с первым числом)
@@ -462,10 +474,12 @@ namespace calculator
         // Удаление - <--
         private void button5_Click(object sender, EventArgs e)
         {
+            // Объявляем локальные переменные
             int lenght = textBox1.Text.Length - 1;
             string text = textBox1.Text;
 
-            // Если первый номер не указан (т.е если вводим первое число)
+
+            // Если первый номер не указан (т.е если редактируем первое число)
             if (firstNumberIsMemorized == "")
             {
                 textBox1.Clear();
@@ -479,8 +493,8 @@ namespace calculator
             }
 
 
-            // Если первый номер указан (т.е если вводим второе число)
-            else if (firstNumberIsMemorized != "" & result == 0)
+            // Если первый номер указан (т.е если редактируем второе число) (при условие если не меняли результат)
+            else if (firstNumberIsMemorized != "" & result == 0 || EditNumberTwo != "" & result == 0)
             {
                 textBox1.Clear();
                 textBox2.Clear();
@@ -495,8 +509,8 @@ namespace calculator
             }
 
 
-            // Если результат готов
-            else
+            // Если редактируем результат
+            else if (firstNumberIsMemorized != "" & numberTwo != 0 & numberOne != 0 & res == 0)
             {
                 textBox1.Clear();
                 textBox2.Clear();
@@ -509,16 +523,23 @@ namespace calculator
                     textBox1.Text = EditRes;
                     textBox2.Text = EditRes;
                 }
-
             }
 
 
+            // Иначе
+            else
+            {
+                textBox1.Clear();
+                textBox2.Clear();
 
+                textBox2.Text = firstNumberIsMemorized + operation;
 
-
-
-
-
+                for (int i = 0; i < lenght; i++)
+                {
+                    textBox1.Text = textBox1.Text + text[i];
+                    textBox2.Text = textBox2.Text + text[i];
+                }
+            }
         }
 
 
@@ -583,9 +604,12 @@ namespace calculator
             // (то есть если мы нажали на операцию после = будет это)
             if (EndOfOperation == "yes")
             {
-                // Если Редактирование результата правда
+                // Если произошло редактирование результата
                 if (EditRes != "")
                 {
+                    // Номер два равен нулю
+                    numberTwo = 0;
+
                     // Очищаем второй текст бокс от предыдущих вычислений
                     textBox2.Clear();
 
@@ -604,10 +628,17 @@ namespace calculator
                     // Операция которую при вызове этой функции
                     operation = FundsEntryOperation;
 
-                    // Результат равен первому числу
+                    // Результат равен редактированному результату
                     double res = Convert.ToDouble(EditRes);
 
-                    res = numberOne;
+                    // Очищаем редактированный результат
+                    EditRes = "";
+
+                    // Первое число равно этому редактированному результату
+                    numberOne = res;
+
+                    // Результат равен первому числу
+                    result = numberOne;
 
                     // Запомнили действие
                     firstNumberIsMemorized = textBox1.Text;
@@ -617,14 +648,14 @@ namespace calculator
 
                     // Вызов функции (TemplateForOperationsFromAbove) (показывание опериции сверху с первым числом)
                     textBox2.Text = textBox2.Text + FundsEntryOperation;
-
-                    EditRes = "";       
                 }
 
-                // Если оно не трогалось то
+
+                // Если редактирование результата не трогалось
                 else if (EditRes == "")
                 {
-                    EditRes = "";
+                    // Номер два равен нулю
+                    numberTwo = 0;
 
                     // Очищаем второй текст бокс от предыдущих вычислений
                     textBox2.Clear();
@@ -657,11 +688,13 @@ namespace calculator
                     textBox2.Text = textBox2.Text + FundsEntryOperation;
                 }
 
+
+                // Иначе ошибка
                 else
                 {
+                    // Вызывем функция (Error) - ошибка
                     Error();
                 }
-
             }
 
 
@@ -687,6 +720,7 @@ namespace calculator
             // (то есть если сработала ошибка будет это)
             else if (EndOfOperation == "error")
             {
+                // Вызывем функция (Error) - ошибка
                 Error();
             }
         }
@@ -708,8 +742,10 @@ namespace calculator
                 // Переменной (EndOfOperation) типа string присваиваем строку no (прошлая операция закончилась поэтому мы меняем yes --> no)
                 EndOfOperation = "no";
 
+                // Обнуляем результат
                 result = 0;
 
+                // Присваиваем к результату превый номер
                 result = numberOne;
 
                 // Добавляем в первый текст бокс предыдущий результат и цифру number
