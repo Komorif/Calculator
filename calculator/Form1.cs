@@ -16,7 +16,7 @@ namespace calculator
         string firstNumberIsMemorized = "";
 
         // Объявляем публичные переменные (double)
-        public double numberOne = 0, numberTwo = 0, result = 0; // Специально даём Первому и второму числу 0 значение для будущей проверки
+        public double numberOne = double.MinValue, numberTwo = double.MinValue, result = double.MinValue; // Специально даём Первому и второму числу 0 значение для будущей проверки
 
         // Конец операции
         public string EndOfOperation = "no";
@@ -26,7 +26,7 @@ namespace calculator
 
         public string EditNumberTwo = "";
 
-        public double res = 0;
+        public double res = double.MinValue;
 
         // Начало
 
@@ -281,7 +281,7 @@ namespace calculator
                 numberTwo = Convert.ToDouble(textBox1.Text);
 
                 // Если все правильно (первый номер и второй) не равны нулю
-                if (numberTwo != 0 & numberOne != 0)
+                if (numberTwo != double.MinValue & numberOne != double.MinValue)
                 {
                     // Операция (сложения) первого и второго числа
                     result = numberOne + numberTwo;
@@ -326,7 +326,7 @@ namespace calculator
                 numberTwo = Convert.ToDouble(textBox1.Text);
 
                 // Если все правильно (первый номер и второй) не равны нулю
-                if (numberTwo != 0 & numberOne != 0)
+                if (numberTwo != double.MinValue & numberOne != double.MinValue)
                 {
                     // Операция (сложения) первого и второго числа
                     result = numberOne - numberTwo;
@@ -371,7 +371,7 @@ namespace calculator
                 numberTwo = Convert.ToDouble(textBox1.Text);
 
                 // Если все правильно (первый номер и второй) не равны нулю
-                if (numberTwo != 0 & numberOne != 0)
+                if (numberTwo != double.MinValue & numberOne != double.MinValue)
                 {
                     // Операция (сложения) первого и второго числа
                     result = numberOne * numberTwo;
@@ -416,7 +416,7 @@ namespace calculator
                 numberTwo = Convert.ToDouble(textBox1.Text);
 
                 // Если все правильно (первый номер и второй) не равны нулю
-                if (numberTwo != 0 & numberOne != 0)
+                if (numberTwo != double.MinValue & numberOne != double.MinValue)
                 {
                     // Операция (сложения) первого и второго числа
                     result = numberOne / numberTwo;
@@ -480,7 +480,7 @@ namespace calculator
 
 
             // Если первый номер не указан (т.е если редактируем первое число)
-            if (firstNumberIsMemorized == "")
+            if (firstNumberIsMemorized == "" & EditRes == "" & EditNumberTwo == "" & res == 0)
             {
                 textBox1.Clear();
                 textBox2.Clear();
@@ -494,7 +494,10 @@ namespace calculator
 
 
             // Если первый номер указан (т.е если редактируем второе число) (при условие если не меняли результат)
-            else if (firstNumberIsMemorized != "" & result == 0 || EditNumberTwo != "" & result == 0)
+            else if (firstNumberIsMemorized != "" & result == double.MinValue || // Обычная ситуация если первый номер известен и результат неизвестен => 0 => вводим второе число
+
+                EditNumberTwo != "" & result == double.MinValue) // Номер два изменился и результат неизвестен => 0 => вводим второе число
+
             {
                 textBox1.Clear();
                 textBox2.Clear();
@@ -510,7 +513,7 @@ namespace calculator
 
 
             // Если редактируем результат
-            else if (firstNumberIsMemorized != "" & numberTwo != 0 & numberOne != 0 & res == 0)
+            else if (firstNumberIsMemorized != "" & numberTwo != double.MinValue & numberOne != double.MinValue & res != 0)
             {
                 textBox1.Clear();
                 textBox2.Clear();
@@ -608,7 +611,7 @@ namespace calculator
                 if (EditRes != "")
                 {
                     // Номер два равен нулю
-                    numberTwo = 0;
+                    numberTwo = double.MinValue;
 
                     // Очищаем второй текст бокс от предыдущих вычислений
                     textBox2.Clear();
@@ -655,7 +658,7 @@ namespace calculator
                 else if (EditRes == "")
                 {
                     // Номер два равен нулю
-                    numberTwo = 0;
+                    numberTwo = double.MinValue;
 
                     // Очищаем второй текст бокс от предыдущих вычислений
                     textBox2.Clear();
@@ -686,14 +689,6 @@ namespace calculator
 
                     // Вызов функции (TemplateForOperationsFromAbove) (показывание опериции сверху с первым числом)
                     textBox2.Text = textBox2.Text + FundsEntryOperation;
-                }
-
-
-                // Иначе ошибка
-                else
-                {
-                    // Вызывем функция (Error) - ошибка
-                    Error();
                 }
             }
 
