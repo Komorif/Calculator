@@ -143,6 +143,59 @@ namespace calculator
         }
 
 
+
+
+        // Запятая - ,
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            // Проверяем, есть ли уже запятая в числовом вводе
+            if (!textBox1.Text.Contains(","))
+            {
+                // Если запятой еще нет, добавляем ее
+                if (EndOfOperation == "yes")
+                {
+                    textBox2.Clear();
+                    textBox1.Clear();
+
+                    EndOfOperation = "no";
+                        
+                    result = 0;
+
+                    result = numberOne;
+
+                    textBox1.Text = textBox1.Text + "0,";
+                    textBox2.Text = textBox2.Text + "0,";
+                }
+                else if (EndOfOperation == "no")
+                {
+                    // Если вводить число еще не начали, добавляем 0 перед запятой
+                    if (textBox1.Text == "")
+                    {
+                        textBox1.Text = "0,";
+                        textBox2.Text = textBox2.Text + "0,";
+                    }
+                    else
+                    {
+                        textBox1.Text = textBox1.Text + ",";
+                        textBox2.Text = textBox2.Text + ",";
+                    }
+                }
+                else if (EndOfOperation == "error")
+                {
+                    textBox2.Clear();
+                    textBox1.Clear();
+
+                    EndOfOperation = "no";
+
+                    textBox1.Text = textBox1.Text + "0,";
+                    textBox2.Text = textBox2.Text + "0,";
+                }
+            }
+        }
+
+        
+
+
         // Нужно только "одно" число
 
         // Процент - %
@@ -553,6 +606,8 @@ namespace calculator
                 textBox2.Text = textBox2.Text + number;
             }
         }
+
+
 
 
 

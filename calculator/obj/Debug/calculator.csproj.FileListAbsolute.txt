@@ -9,3 +9,13 @@ E:\C#files\calculator\calculator\obj\Debug\calculator.csproj.CoreCompileInputs.c
 E:\C#files\calculator\calculator\obj\Debug\calculator.exe
 E:\C#files\calculator\calculator\obj\Debug\calculator.pdb
 E:\C#files\calculator\calculator\obj\Debug\calculator.Form1.resources
+I:\C#files\calculator\calculator\bin\Debug\calculator.exe.config
+I:\C#files\calculator\calculator\bin\Debug\calculator.exe
+I:\C#files\calculator\calculator\obj\Debug\calculator.csproj.AssemblyReference.cache
+I:\C#files\calculator\calculator\obj\Debug\calculator.Form1.resources
+I:\C#files\calculator\calculator\obj\Debug\calculator.Properties.Resources.resources
+I:\C#files\calculator\calculator\obj\Debug\calculator.csproj.GenerateResource.cache
+I:\C#files\calculator\calculator\obj\Debug\calculator.csproj.CoreCompileInputs.cache
+I:\C#files\calculator\calculator\obj\Debug\calculator.exe
+I:\C#files\calculator\calculator\obj\Debug\calculator.pdb
+I:\C#files\calculator\calculator\bin\Debug\calculator.pdb
